@@ -40,10 +40,10 @@ def get_xlsx_file(num):
 
 def get_dynamics_url(num):
     switch = {
-        1: 'https://kardium-vanilla71d0f65080bd6e72devaos.axcloud.dynamics.com/?cmp=KARD&mi=HcmPositionList',
-        2: 'https://kardium-migrationb60486bc1b9785abdevaos.axcloud.dynamics.com/?cmp=KARD&mi=HcmPositionList',
-        3: 'https://kardium-vanilla71d0f65080bd6e72devaos.axcloud.dynamics.com/?cmp=KARD&mi=HcmPositionList',
-        4: 'https://kardium-migrationb60486bc1b9785abdevaos.axcloud.dynamics.com/?cmp=KARD&mi=HcmPositionList',
+        1:  'URL1' ## Removed because it's the URL of the Company,
+        2: 'URL2' ## Removed because it's the URL of the Company,
+        3: 'URL3' ## Removed because it's the URL of the Company,
+        4: 'URL4' ## Removed because it's the URL of the Company
     }
     return switch.get(num, 'https:www.google.com')
 
@@ -244,5 +244,6 @@ if __name__ == "__main__":
 
 
 ## step_by_step_unlinking()
+
 
 ## step_by_step_unlinking()
