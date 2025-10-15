@@ -7,12 +7,12 @@ import dm_get_azure_db_credentials as az_log
 
 
 # === Configuration ===
-client_id = "be630b6c-fa9a-408a-a4ba-36893009d956"
-tenant_id = "91aaadf7-17fe-4e27-8046-10d35b53e9eb"
-client_secret = "~D08Q~WrDwRcqqZB0ALzQ52BnDBaV9B~qu9rua9L"
-redirect_uri = "http://localhost:5000/getAToken" # Must match what's in Azure AD
+client_id = "Redacted"
+tenant_id = "Redacted"
+client_secret = "Redacted"
+redirect_uri = "http://localhost:5000/getAToken"
 authority = f"https://login.microsoftonline.com/{tenant_id}"
-scope = ["https://kardium-migrationb60486bc1b9785abdevaos.axcloud.dynamics.com/.default"]
+scope = ["Redacted/.default"]
 
 
 app = Flask(__name__)
@@ -60,7 +60,7 @@ def get_a_token():
         access_token = result['access_token']
         for i in range(0,8):
             _ext =entity_name(i)
-            odata_url = f"https://kardium-migrationb60486bc1b9785abdevaos.axcloud.dynamics.com/data/{_ext}"
+            odata_url = f"Redacted/{_ext}"
             headers = {"Authorization": f"Bearer {access_token}","Accept": "application/json"}
 
             response = requests.get(odata_url, headers=headers)
@@ -77,4 +77,5 @@ def get_a_token():
 
 if __name__ == '__main__':
     app.run(port=5000)
+
 
