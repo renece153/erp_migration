@@ -1,20 +1,13 @@
-
-
-
-
-
 import os
 import requests
 
 # Set your credentials (replace with actual values or use environment variables)
 # HCP_CLIENT_ID = os.getenv("HCP_CLIENT_ID", "your-client-id")
 # HCP_CLIENT_SECRET = os.getenv("HCP_CLIENT_SECRET", "your-client-secret")
-
-# Step 1: Get the HCP API token
 auth_url = "https://auth.idp.hashicorp.com/oauth2/token"
 auth_payload = {
-"client_id": "Bodrtu2LYKx1NtMwjNEmmwEGN74lzoZZ",
-"client_secret": "cTHmCz4aQDFDvaQdqUPd6mTM3Y2idho_qdFlaGVE3J491Lk94zsa5T80ZyuL8V6V",
+"client_id": "Redacted" ##Remove Client Secret from Vault,
+"client_secret": "Redacted" ##Remove Client Secret from Vault,
 "grant_type": "client_credentials",
 "audience": "https://api.hashicorp.cloud"
 }
@@ -36,3 +29,4 @@ secrets = secrets_response.json()
 
 # Print the secrets
 print("Fetched secrets:", secrets)
+
