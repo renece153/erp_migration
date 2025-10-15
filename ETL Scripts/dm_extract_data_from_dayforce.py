@@ -36,38 +36,17 @@ logging.config.dictConfig({
     'loggers': {'zeep.transports': {'level': 'DEBUG','propagate': True,'handlers': ['console'],},}
 })
 
-#
-# # WSDL URL
-# wsdl_url = 'https://can251.dayforcehcm.com/Datasvc/DayforceService.svc?wsdl'
-#
-# session = Session()
-#
-# session.verify = True # or False if you want to skip SSL verification (not recommended)
-# transport = Transport(session=session, timeout=300)
-#
-#
-# # Create a SOAP client
-# client_specific_wsdl = 'https://can251.dayforcehcm.com/Datasvc/DayforceService.svc?wsdl'
-# client = Client(wsdl=client_specific_wsdl)
-#
-#
-# # Example: Call the GetClientSiteUri method
-# company_name = 'Kardium'
-# response = client.service.GetClientSiteUri(company_name)
-# print("Client Site URI:", response)
-
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-COMPANY_NAME = "Kardium"
-USERNAME = "Dayforce.D365"
-PASSWORD = "DataMigration2025"
+COMPANY_NAME = "Redacted"
+USERNAME = "Redacted"
+PASSWORD = "Redacted"
 
 
 # Step 1: Initial WSDL
-initial_wsdl = 'https://cantest242.dayforcehcm.com/Datasvc/DayforceService.svc?wsdl'
+initial_wsdl = "Redacted"
 
 
 # Setup transport with timeout
@@ -77,15 +56,6 @@ transport = Transport(session=session, timeout=300)
 
 # Step 2: Create initial client
 client = Client(wsdl=initial_wsdl, transport=transport,wsse=UsernameToken(USERNAME, PASSWORD))
-
-
-# print("\n--- Available Types ---")
-# for t in client.wsdl.types.types:
-#     print(t.qname)
-
-# 🔍 Check the input signature of the Query method
-# print("\n--- Query Method Signature ---")
-# print(client.service._binding._operations['Query'].input.signature())
 
 try:
     response = client.service.GetClientSiteUri(COMPANY_NAME)
@@ -159,19 +129,6 @@ try:
         for i in range(len(_list)):
             fields_to_extract.append(_list[i][0])
 
-        # fields_to_extract = ['EmployeeNumber', 'FirstName', 'LastName', 'XRefCode',
-        # 'AvatarUri', 'BioExempt', 'BirthDate', 'ClockSupervisor', 'COBRANotificationSentDate',
-        # 'CommonName', 'ContactInformation', 'ContextDate', 'DateOfDeath', 'DisplayName',
-        # 'EligibleForRehire',  'EstimatedReturnDate', 'ExportDate', 'FederationId',
-        #  'Gender', 'HireDate', 'IsAboriginal', 'IsVisibleMinority',
-        # 'LastModifiedTimestamp',  'LastPayrollNewHireExportDate', 'LoginId', 'MaidenName',
-        # 'MiddleName', 'NewHireApprovalDate', 'NewHireApproved', 'NewHireApprovedBy',
-        # 'OriginalHireDate', 'PayrollKey', 'PPACAOverrideDate', 'PreferredLastName', 'PreStartDate',
-        # 'RegisteredDisabled', 'RequiresExitInterview', 'SchoolYearXRefCode', 'SeniorityDate',
-        # 'SocialSecurityNumber', 'SSNCountryCode', 'SSNExpiryDate', 'StartDate', 'Suffix',
-        # 'TerminationDate', 'Title', 'VeteranSeparationDate'
-        # ]
-
         employee_list = []
 
         for emp in employee_data:
@@ -181,9 +138,9 @@ try:
 
         df = pd.DataFrame(employee_list)
         df.to_sql(con=az_log.output_engine(), name='day_force_data', if_exists='replace')
-        ## df.to_excel('output.xlsx', sheet_name='Sheet1', index=False, header=True, engine='xlsxwriter')
     else:
         print(f"Error: {response.Error.Code}")
         print(f"Message: {response.Error.Message}")
 except Exception as e:
+
     logger.exception("An error occurred during the Dayforce client operation.")
